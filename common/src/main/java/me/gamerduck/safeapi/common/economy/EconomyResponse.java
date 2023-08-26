@@ -4,9 +4,10 @@ public record EconomyResponse(double amount, double balance,
                               ResponseType type, String errorMessage) {
 
     public enum ResponseType {
+        NOT_IMPLEMENTED(0),
         SUCCESS(1),
         FAILURE(2),
-        NOT_IMPLEMENTED(3);
+        ;
 
         private int id;
 

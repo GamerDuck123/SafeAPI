@@ -19,7 +19,7 @@ tasks {
             "name" to rootProject.name,
             "group" to project.group,
             "version" to project.version,
-            "description" to rootProject.description,
+            "description" to project.properties["description"],
             "apiVersion" to "1.20"
         )
 

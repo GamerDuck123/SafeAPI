@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/fabric" />
             <option value="$PROJECT_DIR$/paper" />
+            <option value="$PROJECT_DIR$/velocity" />
           </set>
         </option>
       </GradleProjectSettings>

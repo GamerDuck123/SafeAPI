@@ -2,33 +2,27 @@
   "schemaVersion": 1,
   "id": "safeapi",
   "version": "${version}",
-  "name": "Safe API",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "${name}",
+  "description": "${description}",
   "authors": [
-    "Me!"
+    "GamerDuck123"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "${website}",
+    "sources": "${sources}",
+    "issues": "${issues}"
   },
   "license": "CC0-1.0",
   "icon": "assets/safeapi/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "me.gamerduck.safeapi.fabric.SafeAPI"
-    ]
+    "main": ["${group}.SafeAPI"]
   },
-  "mixins": [
-    "safeapi.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
-    "fabricloader": ">=0.14.22",
-    "minecraft": "~1.20.1",
+    "fabricloader": ">=${fabricLoaderVersion}",
+    "minecraft": "~${minecraftVersion}",
     "java": ">=17",
-    "fabric-api": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "fabric-api": ">=${fabricApiVersion}"
   }
 }

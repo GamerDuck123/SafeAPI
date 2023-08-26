@@ -10,12 +10,12 @@ version = rootProject.version
 dependencies {
     compileOnly(project(":common"))
 
-    minecraft("com.mojang", "minecraft", "1.20.1")
+    minecraft("com.mojang", "minecraft", project.property("minecraftVersion") as String)
 
     mappings(loom.officialMojangMappings())
 
-    modImplementation("net.fabricmc", "fabric-loader", "0.14.21")
-    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.85.0+1.20.1")
+    modImplementation("net.fabricmc", "fabric-loader", project.property("fabricLoaderVersion") as String)
+    modImplementation("net.fabricmc.fabric-api", "fabric-api", project.property("fabricApiVersion") as String)
 }
 
 base {

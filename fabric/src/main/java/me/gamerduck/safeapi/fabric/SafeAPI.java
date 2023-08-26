@@ -9,7 +9,6 @@ public class SafeAPI implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
-        LOGGER.info(String.format("Enabled Version %s"));
+        LOGGER.info(String.format("Enabled SafeAPI, the new Vault replacement"));
     }
 }

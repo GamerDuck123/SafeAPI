@@ -8,8 +8,6 @@ public abstract class Economy<E> {
 
     public abstract String getName();
 
-    public abstract int fractionalDigits();
-
     public abstract String format(double amount);
 
     public abstract String currencyNamePlural();

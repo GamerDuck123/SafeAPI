@@ -4,9 +4,9 @@ plugins {
 
 defaultTasks("build")
 
-rootProject.group = "me.gamerduck.safeapi"
-rootProject.version = "1.0-SNAPSHOT"
-rootProject.description = "A new age vault!"
+rootProject.group = project.property("group") as String
+rootProject.version = project.property("version") as String
+rootProject.description = project.property("description") as String
 
 val combine = tasks.register<Jar>("combine") {
     mustRunAfter("build")
@@ -24,7 +24,8 @@ allprojects {
     listOf(
         ":fabric",
         ":paper",
-        ":common"
+        ":common",
+        ":velocity"
     ).forEach {
         project(it) {
             apply(plugin = "java")
@@ -51,14 +52,12 @@ allprojects {
                 }
             }
 
-            if (this.name == "forge") {
+            if (this.name == "velocity") {
                 repositories {
+                    maven("https://repo.papermc.io/repository/maven-public/")
                 }
             }
             dependencies {
-//                compileOnly("net.kyori", "adventure-api", "4.14.0")
-//
-//                compileOnly("net.kyori", "adventure-text-minimessage", "4.14.0")
             }
         }
     }
@@ -67,6 +66,8 @@ allprojects {
 tasks {
     assemble {
         subprojects.forEach { project ->
+            dependsOn(":${project.name}:clean")
+            dependsOn(":${project.name}:processResources")
             dependsOn(":${project.name}:build")
         }
 
