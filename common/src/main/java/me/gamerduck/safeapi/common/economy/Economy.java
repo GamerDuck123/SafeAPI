@@ -1,33 +1,54 @@
-package me.gamerduck.safeapi.common;
+package me.gamerduck.safeapi.common.economy;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface Economy<E> {
+public abstract class Economy<E> {
 
-    boolean isEnabled();
+    public abstract boolean isEnabled();
 
-    String getName();
+    public abstract String getName();
 
-    int fractionalDigits();
+    public abstract int fractionalDigits();
 
-    String format(double amount);
+    public abstract String format(double amount);
 
-    String currencyNamePlural();
+    public abstract String currencyNamePlural();
 
-    String currencyNameSingular();
+    public abstract String currencyNameSingular();
 
-    CompletableFuture<Boolean> hasAccount(E player);
+    public abstract Boolean hasAccount(E player);
+    public CompletableFuture<Boolean> hasAccountAsync(E player) {
+        return CompletableFuture.supplyAsync(() -> hasAccount(player));
+    }
 
-    CompletableFuture<Double> getBalance(E player);
+    public abstract Double getBalance(E player);
+    public CompletableFuture<Double> getBalanceAsync(E player) {
+        return CompletableFuture.supplyAsync(() -> getBalance(player));
+    }
 
-    CompletableFuture<EconomyResponse> setBalance(E player, double amount);
+    public abstract EconomyResponse setBalance(E player, double amount);
+    public CompletableFuture<EconomyResponse> setBalanceAsync(E player, double amount) {
+        return CompletableFuture.supplyAsync(() -> setBalance(player, amount));
+    }
 
-    CompletableFuture<Boolean> has(E player, double amount);
+    public abstract Boolean has(E player, double amount);
+    public CompletableFuture<Boolean> hasAsync(E player, double amount) {
+        return CompletableFuture.supplyAsync(() -> has(player, amount));
+    }
 
-    CompletableFuture<EconomyResponse> withdrawPlayer(E player, double amount);
+    public abstract EconomyResponse withdrawPlayer(E player, double amount);
+    public CompletableFuture<EconomyResponse> withdrawPlayerAsync(E player, double amount) {
+        return CompletableFuture.supplyAsync(() -> withdrawPlayer(player, amount));
+    }
 
-    CompletableFuture<EconomyResponse> depositPlayer(E player, double amount);
+    public abstract EconomyResponse depositPlayer(E player, double amount);
+    public CompletableFuture<EconomyResponse> depositPlayerAsync(E player, double amount) {
+        return CompletableFuture.supplyAsync(() -> depositPlayer(player, amount));
+    }
 
-    CompletableFuture<Boolean> createPlayerAccount(E player);
+    public abstract Boolean createPlayerAccount(E player);
+    public CompletableFuture<Boolean> createPlayerAccountAsync(E player) {
+        return CompletableFuture.supplyAsync(() -> createPlayerAccount(player));
+    }
 
 }

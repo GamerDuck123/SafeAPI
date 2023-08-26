@@ -1,11 +1,11 @@
-package me.gamerduck.safeapi.paper;
+package me.gamerduck.safeapi.paper.economy;
 
-import me.gamerduck.safeapi.common.Economy;
+import me.gamerduck.safeapi.common.economy.Economy;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public interface BukkitEconomy extends Economy<OfflinePlayer> {
+public abstract class BukkitEconomy extends Economy<OfflinePlayer> {
 
-    public JavaPlugin plugin();
+    public abstract JavaPlugin plugin();
 
 }
