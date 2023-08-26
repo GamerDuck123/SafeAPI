@@ -25,7 +25,9 @@ allprojects {
         ":fabric",
         ":paper",
         ":common",
-        ":velocity"
+        ":velocity",
+        ":nukkit",
+        ":bungeecord"
     ).forEach {
         project(it) {
             apply(plugin = "java")
@@ -40,7 +42,7 @@ allprojects {
                 }
             }
 
-            if (this.name == "paper") {
+            if (this.name == "paper" || this.name == "velocity") {
                 repositories {
                     maven("https://repo.papermc.io/repository/maven-public/")
                 }
@@ -52,9 +54,14 @@ allprojects {
                 }
             }
 
-            if (this.name == "velocity") {
+            if (this.name == "nukkit") {
                 repositories {
-                    maven("https://repo.papermc.io/repository/maven-public/")
+                    maven("https://repo.opencollab.dev/maven-snapshots/")
+                }
+            }
+            if (this.name == "bungeecord") {
+                repositories {
+                    maven("https://oss.sonatype.org/content/repositories/snapshots/")
                 }
             }
             dependencies {

@@ -14,9 +14,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/bungeecord" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/fabric" />
             <option value="$PROJECT_DIR$/minestom" />
+            <option value="$PROJECT_DIR$/nukkit" />
             <option value="$PROJECT_DIR$/paper" />
             <option value="$PROJECT_DIR$/velocity" />
           </set>

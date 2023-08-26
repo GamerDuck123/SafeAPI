@@ -1,0 +1,6 @@
+name: '${name}'
+main: '${group}.SafeAPI'
+
+version: '${version}'
+api: '${apiVersion}'
+description: '${description}'

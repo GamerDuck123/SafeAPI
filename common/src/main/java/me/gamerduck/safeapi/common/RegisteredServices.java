@@ -9,7 +9,6 @@ public class RegisteredServices {
     private static Permission permissionProvider;
 
     public static Economy getEconomyProvider() {
-        if (economyProvider == null) throw new NullPointerException("No Economy Provider has been set");
         return economyProvider;
     }
 
@@ -19,7 +18,6 @@ public class RegisteredServices {
     }
 
     public static Permission getPermissionProvider() {
-        if (permissionProvider == null) throw new NullPointerException("No Permission Provider has been set");
         return permissionProvider;
     }
 
