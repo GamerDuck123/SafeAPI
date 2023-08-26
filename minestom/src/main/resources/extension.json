@@ -1,0 +1,5 @@
+{
+  "entrypoint": "${group}.SafeAPI",
+  "name": "${name}",
+  "version": "${version}"
+}

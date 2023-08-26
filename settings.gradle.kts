@@ -15,3 +15,4 @@ pluginManagement {
     }
 }
 include("velocity")
+include("minestom")

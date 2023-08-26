@@ -9,14 +9,8 @@ import org.slf4j.Logger;
         url = "https://example.org", description = "I did it!", authors = {"GamerDuck123"})
 public class SafeAPI {
 
-    private final ProxyServer server;
-    private final Logger logger;
-
     @Inject
     public SafeAPI(ProxyServer server, Logger logger) {
-        this.server = server;
-        this.logger = logger;
-
         logger.info(String.format("Enabled SafeAPI, the new Vault replacement"));
     }
 }

@@ -1,13 +1,15 @@
 package me.gamerduck.safeapi.common.permission;
 
-public abstract class Permission<E, W> {
+public abstract class Permission<P, E, W> {
 
-    abstract public String getName();
+    public abstract P parent();
 
-    abstract public boolean isEnabled();
+    public abstract String getName();
 
-    abstract public boolean hasSuperPermsCompat();
+    public abstract boolean isEnabled();
 
-    abstract public boolean hasGroupSupport();
+    public abstract boolean hasSuperPermsCompat();
+
+    public abstract boolean hasGroupSupport();
 
 }

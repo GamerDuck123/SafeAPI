@@ -2,7 +2,9 @@ package me.gamerduck.safeapi.common.economy;
 
 import java.util.concurrent.CompletableFuture;
 
-public abstract class Economy<E> {
+public abstract class Economy<P, E> {
+
+    public abstract P parent();
 
     public abstract boolean isEnabled();
 
