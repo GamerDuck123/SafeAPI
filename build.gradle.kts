@@ -36,12 +36,6 @@ allprojects {
                 mavenCentral()
             }
 
-            if (this.name == "common") {
-                dependencies {
-//                    compileOnly("com.google.code.gson", "gson", "2.10")
-                }
-            }
-
             if (this.name == "paper" || this.name == "velocity") {
                 repositories {
                     maven("https://repo.papermc.io/repository/maven-public/")
@@ -56,15 +50,15 @@ allprojects {
 
             if (this.name == "nukkit") {
                 repositories {
-                    maven("https://repo.opencollab.dev/maven-snapshots/")
+                    maven("https://repo.opencollab.dev/maven-snapshots")
+                    maven("https://repo.opencollab.dev/maven-releases/")
                 }
             }
+
             if (this.name == "bungeecord") {
                 repositories {
                     maven("https://oss.sonatype.org/content/repositories/snapshots/")
                 }
-            }
-            dependencies {
             }
         }
     }

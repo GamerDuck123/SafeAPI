@@ -56,16 +56,26 @@ public abstract class Economy<P, E> {
         return CompletableFuture.supplyAsync(() -> deposit(player, amount));
     }
 
-    public abstract <A extends Account> A createAccount(E player);
-    public <A extends Account> CompletableFuture<A> createAccountAsync(E player) {
+    public abstract Boolean createAccount(E player);
+    public CompletableFuture<Boolean> createAccountAsync(E player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> createAccount(player));
     }
 
-    public abstract <A extends Account> A getAccount(E player);
-    public <A extends Account> CompletableFuture<A> getAccountAsync(E player) {
+    public abstract Boolean loadAccount(E player);
+    public CompletableFuture<Boolean> loadAccountAsync(E player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
-        return CompletableFuture.supplyAsync(() -> getAccount(player));
+        return CompletableFuture.supplyAsync(() -> loadAccount(player));
+    }
+
+    public Boolean createOrLoadAccount(E player) {
+        if (hasAccount(player)) return loadAccount(player);
+        else return createAccount(player);
+    }
+
+    public CompletableFuture<Boolean> createOrLoadAccountAsync(E player) {
+        if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
+        return CompletableFuture.supplyAsync(() -> createOrLoadAccount(player));
     }
 
     public record Response(double amount, double balance,

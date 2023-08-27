@@ -17,16 +17,15 @@ dependencies {
 
 tasks {
     processResources {
-//        val props = mapOf(
-//            "name" to rootProject.name,
-//            "group" to project.group,
-//            "version" to project.version,
-//            "description" to project.properties["description"],
-//            "apiVersion" to "1.20"
-//        )
-//
-//        filesMatching("velocity.toml") {
-//            expand(props)
-//        }
+        val props = mapOf(
+            "name" to rootProject.name,
+            "group" to project.group,
+            "version" to project.version,
+            "description" to project.properties["description"]
+        )
+
+        filesMatching("velocity-plugin.json") {
+            expand(props)
+        }
     }
 }

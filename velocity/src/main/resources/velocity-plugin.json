@@ -1,0 +1,12 @@
+{
+  "id": "safeapi",
+  "name": "${name}",
+  "version": "${version}",
+  "description": "${description}",
+  "url": "https://modrinth.com/mod/safe-api",
+  "authors": [
+    "GamerDuck123"
+  ],
+  "dependencies": [],
+  "main": "${group}.SafeAPI"
+}

@@ -4,6 +4,9 @@ plugins {
 
 group = "${rootProject.group}.common"
 version = rootProject.version
+dependencies {
+    implementation("org.jetbrains:annotations:20.1.0")
+}
 
 base {
     archivesName.set("${rootProject.name}-${project.name}")

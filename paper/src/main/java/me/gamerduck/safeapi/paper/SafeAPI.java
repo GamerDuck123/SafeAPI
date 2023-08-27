@@ -1,40 +1,40 @@
 package me.gamerduck.safeapi.paper;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import me.gamerduck.safeapi.common.RegisteredServices;
+import me.gamerduck.safeapi.common.RegistrarUpdates;
+import me.gamerduck.safeapi.common.Registrar;
 import me.gamerduck.safeapi.paper.economy.BukkitEconomy;
+import me.gamerduck.safeapi.paper.permission.BukkitPermission;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Logger;
 
 public class SafeAPI extends JavaPlugin implements Listener {
 
     BukkitEconomy economy;
+    BukkitPermission permission;
 
     public SafeAPI() {
-        RegisteredServices.setEconomyProvider(new TestEconomy(this));
+        Registrar.registerEconomyProvider(new ExampleEconomy(this));
     }
 
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
 
-        economy = (BukkitEconomy) RegisteredServices.getEconomyProvider();
+        RegistrarUpdates.listen((listener) -> {
+            economy = (BukkitEconomy) listener.economy();
+            permission = (BukkitPermission) listener.permission();
+        });
+
         Bukkit.getLogger().info(String.format("Enabled SafeAPI, the new Vault replacement"));
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        if (!economy.hasAccount(e.getPlayer())) {
-            economy.createAccount(e.getPlayer());
-        } else {
-            economy.getAccount(e.getPlayer());
-        }
+        economy.createOrLoadAccount(e.getPlayer());
     }
 
     @EventHandler

@@ -1,15 +1,14 @@
 package me.gamerduck.safeapi.paper;
 
 import com.google.common.util.concurrent.AtomicDouble;
-import me.gamerduck.safeapi.common.economy.Account;
 import org.bukkit.OfflinePlayer;
 
-public class TestAccount extends Account {
+public class ExampleAccount {
 
     private final AtomicDouble balance;
     private final OfflinePlayer player;
 
-    public TestAccount(OfflinePlayer player, AtomicDouble balance) {
+    public ExampleAccount(OfflinePlayer player, AtomicDouble balance) {
         this.player = player;
         this.balance = balance;
     }

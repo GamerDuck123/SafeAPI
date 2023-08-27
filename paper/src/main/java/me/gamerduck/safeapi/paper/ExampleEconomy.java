@@ -2,27 +2,22 @@ package me.gamerduck.safeapi.paper;
 
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.AtomicDouble;
-import com.sun.jdi.ClassNotLoadedException;
-import me.gamerduck.safeapi.common.economy.Account;
-import me.gamerduck.safeapi.common.economy.Economy;
 import me.gamerduck.safeapi.paper.economy.BukkitEconomy;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
-public class TestEconomy extends BukkitEconomy {
+public class ExampleEconomy extends BukkitEconomy {
 
-    public final HashMap<UUID, TestAccount> cache = Maps.newHashMap();
+    public final HashMap<UUID, ExampleAccount> cache = Maps.newHashMap();
 
     private final JavaPlugin parent;
     private boolean enabled = false;
 
-    public TestEconomy(JavaPlugin parent) {
+    public ExampleEconomy(JavaPlugin parent) {
         this.parent = parent;
         this.enabled = true;
     }
@@ -69,20 +64,20 @@ public class TestEconomy extends BukkitEconomy {
 
     @Override
     public Response balance(OfflinePlayer player, double amount) {
-        TestAccount account = cache.get(player.getUniqueId());
+        ExampleAccount account = cache.get(player.getUniqueId());
         account.balance(amount);
         return new Response(amount, account.balance().get(), Response.Type.SUCCESS, null);
     }
 
     @Override
     public Boolean has(OfflinePlayer player, double amount) {
-        TestAccount account = cache.get(player.getUniqueId());
+        ExampleAccount account = cache.get(player.getUniqueId());
         return account.balance().get() >= amount;
     }
 
     @Override
     public Response withdraw(OfflinePlayer player, double amount) {
-        TestAccount account = cache.get(player.getUniqueId());
+        ExampleAccount account = cache.get(player.getUniqueId());
         if (amount < 0) return new Response(0, 0, Response.Type.FAILURE, "Cannot withdraw negative funds");
         if (account.balance().get() < amount) return new Response(0, account.balance().get(), Response.Type.FAILURE, "Insufficient funds");
         account.balance(account.balance().get() - amount);
@@ -92,18 +87,21 @@ public class TestEconomy extends BukkitEconomy {
     @Override
     public Response deposit(OfflinePlayer player, double amount) {
         if (amount < 0) return new Response(0, 0, Response.Type.FAILURE, "Cannot deposit negative funds");
-        TestAccount account = cache.get(player.getUniqueId());
+        ExampleAccount account = cache.get(player.getUniqueId());
         account.balance().addAndGet(amount);
         return new Response(amount, account.balance().get(), Response.Type.SUCCESS, null);
     }
 
     @Override
-    public TestAccount createAccount(OfflinePlayer player) {
-        return cache.put(player.getUniqueId(), new TestAccount(player, new AtomicDouble(100.0)));
+    public Boolean createAccount(OfflinePlayer player) {
+        cache.put(player.getUniqueId(), new ExampleAccount(player, new AtomicDouble(100.0)));
+        return cache.containsKey(player.getUniqueId());
     }
 
     @Override
-    public TestAccount getAccount(OfflinePlayer player) {
-        return cache.get(player.getUniqueId());
+    public Boolean loadAccount(OfflinePlayer player) {
+        cache.put(player.getUniqueId(), new ExampleAccount(player, new AtomicDouble(100.0)));
+        return cache.containsKey(player.getUniqueId());
     }
+
 }
