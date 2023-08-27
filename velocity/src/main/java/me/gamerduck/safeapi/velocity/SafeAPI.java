@@ -1,8 +1,6 @@
 package me.gamerduck.safeapi.velocity;
 
 import com.google.inject.Inject;
-import com.velocitypowered.api.plugin.Plugin;
-import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import org.slf4j.Logger;
 

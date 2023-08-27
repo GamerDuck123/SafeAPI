@@ -1,5 +1,6 @@
 package me.gamerduck.safeapi.paper;
 
+import me.gamerduck.safeapi.common.TriState;
 import me.gamerduck.safeapi.paper.permission.BukkitPermission;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.permissions.Permission;
@@ -47,39 +48,39 @@ public class ExamplePermission extends BukkitPermission {
     }
 
     @Override
-    public Boolean playerHas(OfflinePlayer player, String permission) {
-        return playerPermissions.get(player.getUniqueId()).contains(permission);
+    public TriState playerHas(OfflinePlayer player, String permission) {
+        return TriState.fromBoolean(playerPermissions.get(player.getUniqueId()).contains(permission));
     }
 
     @Override
-    public Boolean playerAdd(OfflinePlayer player, String permission) {
-        if (playerHas(player, permission)) return true;
-        return playerPermissions.get(player.getUniqueId()).add(permission);
+    public TriState playerAdd(OfflinePlayer player, String permission) {
+        if (playerHas(player, permission).asBoolean()) return TriState.TRUE;
+        return TriState.fromBoolean(playerPermissions.get(player.getUniqueId()).add(permission));
     }
 
     @Override
-    public Boolean playerRemove(OfflinePlayer player, String permission) {
-        if (!playerHas(player, permission)) return true;
-        return playerPermissions.get(player.getUniqueId()).remove(permission);
+    public TriState playerRemove(OfflinePlayer player, String permission) {
+        if (!playerHas(player, permission).asBoolean()) return TriState.TRUE;
+        return TriState.fromBoolean(playerPermissions.get(player.getUniqueId()).remove(permission));
     }
 
     @Override
-    public Boolean playerSetPrimaryGroup(OfflinePlayer player, String group) {
-        if (getPlayerPrimaryGroup(player).equalsIgnoreCase(group)) return true;
+    public TriState playerSetPrimaryGroup(OfflinePlayer player, String group) {
+        if (getPlayerPrimaryGroup(player).equalsIgnoreCase(group)) return TriState.TRUE;
         playerPrimaryGroup.put(player.getUniqueId(), group);
-        return playerPrimaryGroup.get(player.getUniqueId()).equals(group);
+        return TriState.fromBoolean(playerPrimaryGroup.get(player.getUniqueId()).equals(group));
     }
 
     @Override
-    public Boolean playerAddGroup(OfflinePlayer player, String group) {
-        if (getPlayerGroups(player).contains(group)) return true;
-        return playerGroups.get(player.getUniqueId()).add(group);
+    public TriState playerAddGroup(OfflinePlayer player, String group) {
+        if (getPlayerGroups(player).contains(group)) return TriState.TRUE;
+        return TriState.fromBoolean(playerGroups.get(player.getUniqueId()).add(group));
     }
 
     @Override
-    public Boolean playerRemoveGroup(OfflinePlayer player, String group) {
-        if (!getPlayerGroups(player).contains(group)) return true;
-        return playerGroups.get(player.getUniqueId()).remove(group);
+    public TriState playerRemoveGroup(OfflinePlayer player, String group) {
+        if (!getPlayerGroups(player).contains(group)) return TriState.TRUE;
+        return TriState.fromBoolean(playerGroups.get(player.getUniqueId()).remove(group));
     }
 
     @Override
@@ -113,17 +114,17 @@ public class ExamplePermission extends BukkitPermission {
     }
 
     @Override
-    public Boolean groupHas(String group, String permission) {
+    public TriState groupHas(String group, String permission) {
         return null;
     }
 
     @Override
-    public Boolean groupAdd(String group, String permission) {
+    public TriState groupAdd(String group, String permission) {
         return null;
     }
 
     @Override
-    public Boolean groupRemove(String group, String permission) {
+    public TriState groupRemove(String group, String permission) {
         return null;
     }
 
