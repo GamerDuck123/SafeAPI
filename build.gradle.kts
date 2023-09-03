@@ -8,6 +8,8 @@ defaultTasks("build")
 rootProject.group = project.property("group") as String
 rootProject.version = project.property("version") as String
 rootProject.description = project.property("description") as String
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 val combine = tasks.register<Jar>("combine") {
     mustRunAfter("build")
