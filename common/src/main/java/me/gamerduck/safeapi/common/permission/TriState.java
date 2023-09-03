@@ -1,6 +1,4 @@
-package me.gamerduck.safeapi.common;
-
-import org.jetbrains.annotations.Nullable;
+package me.gamerduck.safeapi.common.permission;
 
 public enum TriState {
     TRUE(true),
@@ -11,7 +9,7 @@ public enum TriState {
         return val ? TRUE : FALSE;
     }
 
-    public static TriState fromBoolean(@Nullable Boolean val) {
+    public static TriState fromBoolean(Boolean val) {
         if (val == null) {
             return UNDEFINED;
         }

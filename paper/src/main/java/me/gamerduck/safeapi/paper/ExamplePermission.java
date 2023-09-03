@@ -1,16 +1,14 @@
 package me.gamerduck.safeapi.paper;
 
-import me.gamerduck.safeapi.common.TriState;
+import me.gamerduck.safeapi.common.permission.TriState;
 import me.gamerduck.safeapi.paper.permission.BukkitPermission;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 public class ExamplePermission extends BukkitPermission {
 

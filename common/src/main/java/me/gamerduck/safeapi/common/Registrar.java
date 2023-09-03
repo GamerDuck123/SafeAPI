@@ -21,7 +21,7 @@ public class Registrar {
         economyRegistrable = canReplace;
         updateListeners.forEach(listener -> {
             listener.updateEconomy(economyProvider);
-            if (!economyRegistrable) listener.close();
+            if (!economyRegistrable && !permissionRegistrable) listener.close();
         });
     }
 
@@ -35,7 +35,7 @@ public class Registrar {
         permissionRegistrable = canReplace;
         updateListeners.forEach(listener -> {
             listener.updatePermission(permissionProvider);
-            if (!permissionRegistrable) listener.close();
+            if (!economyRegistrable && !permissionRegistrable) listener.close();
         });
     }
 

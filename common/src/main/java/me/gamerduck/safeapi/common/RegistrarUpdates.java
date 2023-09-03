@@ -7,7 +7,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-public class RegistrarUpdates implements Closeable {
+public class RegistrarUpdates {
 
     private Economy registeredEconomy;
     private Permission registeredPermission;
@@ -34,7 +34,6 @@ public class RegistrarUpdates implements Closeable {
     public Economy economy() {return registeredEconomy;}
     public Permission permission() {return registeredPermission;}
 
-    @Override
     public void close() {
         Registrar.updateListeners.remove(this);
     }

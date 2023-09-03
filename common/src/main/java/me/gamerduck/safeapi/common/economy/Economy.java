@@ -2,9 +2,9 @@ package me.gamerduck.safeapi.common.economy;
 
 import java.util.concurrent.CompletableFuture;
 
-public abstract class Economy<P, E> {
+public abstract class Economy<Parent, Player> {
 
-    public abstract P parent();
+    public abstract Parent parent();
 
     public abstract boolean enabled();
 
@@ -20,60 +20,60 @@ public abstract class Economy<P, E> {
         return true;
     }
 
-    public abstract Boolean hasAccount(E player);
-    public CompletableFuture<Boolean> hasAccountAsync(E player) {
+    public abstract Boolean hasAccount(Player player);
+    public CompletableFuture<Boolean> hasAccountAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> hasAccount(player));
     }
 
-    public abstract Double balance(E player);
-    public CompletableFuture<Double> balanceAsync(E player) {
+    public abstract Double balance(Player player);
+    public CompletableFuture<Double> balanceAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> balance(player));
     }
 
-    public abstract Response balance(E player, double amount);
-    public CompletableFuture<Response> balanceAsync(E player, double amount) {
+    public abstract Response balance(Player player, double amount);
+    public CompletableFuture<Response> balanceAsync(Player player, double amount) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> balance(player, amount));
     }
 
-    public abstract Boolean has(E player, double amount);
-    public CompletableFuture<Boolean> hasAsync(E player, double amount) {
+    public abstract Boolean has(Player player, double amount);
+    public CompletableFuture<Boolean> hasAsync(Player player, double amount) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> has(player, amount));
     }
 
-    public abstract Response withdraw(E player, double amount);
-    public CompletableFuture<Response> withdrawAsync(E player, double amount) {
+    public abstract Response withdraw(Player player, double amount);
+    public CompletableFuture<Response> withdrawAsync(Player player, double amount) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> withdraw(player, amount));
     }
 
-    public abstract Response deposit(E player, double amount);
-    public CompletableFuture<Response> depositAsync(E player, double amount) {
+    public abstract Response deposit(Player player, double amount);
+    public CompletableFuture<Response> depositAsync(Player player, double amount) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> deposit(player, amount));
     }
 
-    public abstract Boolean createAccount(E player);
-    public CompletableFuture<Boolean> createAccountAsync(E player) {
+    public abstract Boolean createAccount(Player player);
+    public CompletableFuture<Boolean> createAccountAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> createAccount(player));
     }
 
-    public abstract Boolean loadAccount(E player);
-    public CompletableFuture<Boolean> loadAccountAsync(E player) {
+    public abstract Boolean loadAccount(Player player);
+    public CompletableFuture<Boolean> loadAccountAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> loadAccount(player));
     }
 
-    public Boolean createOrLoadAccount(E player) {
+    public Boolean createOrLoadAccount(Player player) {
         if (hasAccount(player)) return loadAccount(player);
         else return createAccount(player);
     }
 
-    public CompletableFuture<Boolean> createOrLoadAccountAsync(E player) {
+    public CompletableFuture<Boolean> createOrLoadAccountAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> createOrLoadAccount(player));
     }

@@ -1,13 +1,11 @@
 package me.gamerduck.safeapi.common.permission;
 
-import me.gamerduck.safeapi.common.TriState;
-
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public abstract class Permission<P, E, W> {
+public abstract class Permission<Parent, Player, W> {
 
-    public abstract P parent();
+    public abstract Parent parent();
 
     public abstract boolean enabled();
 
@@ -26,158 +24,158 @@ public abstract class Permission<P, E, W> {
      *
      */
 
-    public abstract TriState playerHas(E player, String permission);
-    public TriState playerHas(E player, String permission, W world) {
+    public abstract TriState playerHas(Player player, String permission);
+    public TriState playerHas(Player player, String permission, W world) {
         return playerHas(player, permission);
     }
-    public CompletableFuture<TriState> playerHasAsync(E player, String permission) {
+    public CompletableFuture<TriState> playerHasAsync(Player player, String permission) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerHas(player, permission));
     }
-    public CompletableFuture<TriState> playerHasAsync(E player, String permission, W world) {
+    public CompletableFuture<TriState> playerHasAsync(Player player, String permission, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerHas(player, permission, world));
     }
 
-    public abstract TriState playerAdd(E player, String permission);
-    public TriState playerAdd(E player, String permission, W world) {
+    public abstract TriState playerAdd(Player player, String permission);
+    public TriState playerAdd(Player player, String permission, W world) {
         return playerAdd(player, permission);
     }
-    public CompletableFuture<TriState> playerAddAsync(E player, String permission) {
+    public CompletableFuture<TriState> playerAddAsync(Player player, String permission) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerAdd(player, permission));
     }
-    public CompletableFuture<TriState> playerAddAsync(E player, String permission, W world) {
+    public CompletableFuture<TriState> playerAddAsync(Player player, String permission, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerAdd(player, permission, world));
     }
 
-    public abstract TriState playerRemove(E player, String permission);
-    public TriState playerRemove(E player, String permission, W world) {
+    public abstract TriState playerRemove(Player player, String permission);
+    public TriState playerRemove(Player player, String permission, W world) {
         return playerRemove(player, permission);
     }
-    public CompletableFuture<TriState> playerRemoveAsync(E player, String permission) {
+    public CompletableFuture<TriState> playerRemoveAsync(Player player, String permission) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerRemove(player, permission));
     }
-    public CompletableFuture<TriState> playerRemoveAsync(E player, String permission, W world) {
+    public CompletableFuture<TriState> playerRemoveAsync(Player player, String permission, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerRemove(player, permission, world));
     }
 
-    public abstract TriState playerSetPrimaryGroup(E player, String group);
-    public TriState playerSetPrimaryGroup(E player, String group, W world) {
+    public abstract TriState playerSetPrimaryGroup(Player player, String group);
+    public TriState playerSetPrimaryGroup(Player player, String group, W world) {
         return playerSetPrimaryGroup(player, group);
     }
-    public CompletableFuture<TriState> playerSetPrimaryGroupAsync(E player, String group) {
+    public CompletableFuture<TriState> playerSetPrimaryGroupAsync(Player player, String group) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerSetPrimaryGroup(player, group));
     }
-    public CompletableFuture<TriState> playerSetPrimaryGroupAsync(E player, String group, W world) {
+    public CompletableFuture<TriState> playerSetPrimaryGroupAsync(Player player, String group, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerSetPrimaryGroup(player, group, world));
     }
 
-    public abstract TriState playerAddGroup(E player, String group);
-    public TriState playerAddGroup(E player, String group, W world) {
+    public abstract TriState playerAddGroup(Player player, String group);
+    public TriState playerAddGroup(Player player, String group, W world) {
         return playerAddGroup(player, group);
     }
-    public CompletableFuture<TriState> playerAddGroupAsync(E player, String group) {
+    public CompletableFuture<TriState> playerAddGroupAsync(Player player, String group) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerAddGroup(player, group));
     }
-    public CompletableFuture<TriState> playerAddGroupAsync(E player, String group, W world) {
+    public CompletableFuture<TriState> playerAddGroupAsync(Player player, String group, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerAddGroup(player, group, world));
     }
 
-    public abstract TriState playerRemoveGroup(E player, String group);
-    public TriState playerRemoveGroup(E player, String group, W world) {
+    public abstract TriState playerRemoveGroup(Player player, String group);
+    public TriState playerRemoveGroup(Player player, String group, W world) {
         return playerRemoveGroup(player, group);
     }
-    public CompletableFuture<TriState> playerRemoveGroupAsync(E player, String group) {
+    public CompletableFuture<TriState> playerRemoveGroupAsync(Player player, String group) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerRemoveGroup(player, group));
     }
-    public CompletableFuture<TriState> playerRemoveGroupAsync(E player, String group, W world) {
+    public CompletableFuture<TriState> playerRemoveGroupAsync(Player player, String group, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> playerRemoveGroup(player, group, world));
     }
 
-    public abstract Set<String> getPlayerGroups(E player);
-    public Set<String> getPlayerGroups(E player, W world) {
+    public abstract Set<String> getPlayerGroups(Player player);
+    public Set<String> getPlayerGroups(Player player, W world) {
         return getPlayerGroups(player);
     }
-    public CompletableFuture<Set<String>> getPlayerGroupsAsync(E player) {
+    public CompletableFuture<Set<String>> getPlayerGroupsAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerGroups(player));
     }
-    public CompletableFuture<Set<String>> getPlayerGroupsAsync(E player, W world) {
+    public CompletableFuture<Set<String>> getPlayerGroupsAsync(Player player, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerGroups(player, world));
     }
 
-    public abstract String getPlayerPrimaryGroup(E player);
-    public String getPlayerPrimaryGroup(E player, W world) {
+    public abstract String getPlayerPrimaryGroup(Player player);
+    public String getPlayerPrimaryGroup(Player player, W world) {
         return getPlayerPrimaryGroup(player);
     }
-    public CompletableFuture<String> getPlayerPrimaryGroupAsync(E player) {
+    public CompletableFuture<String> getPlayerPrimaryGroupAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerPrimaryGroup(player));
     }
-    public CompletableFuture<String> getPlayerPrimaryGroupAsync(E player, W world) {
+    public CompletableFuture<String> getPlayerPrimaryGroupAsync(Player player, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerPrimaryGroup(player, world));
     }
 
-    public abstract String getPlayerPrefix(E player);
-    public String getPlayerPrefix(E player, W world) {
+    public abstract String getPlayerPrefix(Player player);
+    public String getPlayerPrefix(Player player, W world) {
         return getPlayerPrefix(player);
     }
-    public CompletableFuture<String> getPlayerPrefixAsync(E player) {
+    public CompletableFuture<String> getPlayerPrefixAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerPrefix(player));
     }
-    public CompletableFuture<String> getPlayerPrefixAsync(E player, W world) {
+    public CompletableFuture<String> getPlayerPrefixAsync(Player player, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerPrefix(player, world));
     }
 
-    public abstract String setPlayerPrefix(E player, String prefix);
-    public String setPlayerPrefix(E player, String prefix, W world) {
+    public abstract String setPlayerPrefix(Player player, String prefix);
+    public String setPlayerPrefix(Player player, String prefix, W world) {
         return setPlayerPrefix(player, prefix);
     }
-    public CompletableFuture<String> setPlayerPrefixAsync(E player, String prefix) {
+    public CompletableFuture<String> setPlayerPrefixAsync(Player player, String prefix) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> setPlayerPrefix(player, prefix));
     }
-    public CompletableFuture<String> getPlayerPrefixAsync(E player, String prefix, W world) {
+    public CompletableFuture<String> getPlayerPrefixAsync(Player player, String prefix, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> setPlayerPrefix(player, prefix, world));
     }
 
-    public abstract String getPlayerSuffix(E player);
-    public String getPlayerSuffix(E player, W world) {
+    public abstract String getPlayerSuffix(Player player);
+    public String getPlayerSuffix(Player player, W world) {
         return getPlayerSuffix(player);
     }
-    public CompletableFuture<String> getPlayerSuffixAsync(E player) {
+    public CompletableFuture<String> getPlayerSuffixAsync(Player player) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerPrefix(player));
     }
-    public CompletableFuture<String> getPlayerSuffixAsync(E player, W world) {
+    public CompletableFuture<String> getPlayerSuffixAsync(Player player, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> getPlayerPrefix(player, world));
     }
 
-    public abstract String setPlayerSuffix(E player, String suffix);
-    public String setPlayerSuffix(E player, String prefix, W world) {
+    public abstract String setPlayerSuffix(Player player, String suffix);
+    public String setPlayerSuffix(Player player, String prefix, W world) {
         return setPlayerSuffix(player, prefix);
     }
-    public CompletableFuture<String> setPlayerSuffixAsync(E player, String prefix) {
+    public CompletableFuture<String> setPlayerSuffixAsync(Player player, String prefix) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> setPlayerSuffix(player, prefix));
     }
-    public CompletableFuture<String> getPlayerSuffixAsync(E player, String prefix, W world) {
+    public CompletableFuture<String> getPlayerSuffixAsync(Player player, String prefix, W world) {
         if (!allowAsync()) throw new IllegalStateException("Asynchronous operations are not supported");
         return CompletableFuture.supplyAsync(() -> setPlayerSuffix(player, prefix, world));
     }

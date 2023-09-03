@@ -5,7 +5,6 @@ plugins {
 group = "${rootProject.group}.common"
 version = rootProject.version
 dependencies {
-    implementation("org.jetbrains:annotations:20.1.0")
 }
 
 base {
@@ -25,13 +24,13 @@ tasks {
         archiveClassifier.set("")
         mergeServiceFiles()
 
-        listOf(
-            "net.kyori",
-            "org.bstats",
-            "org.simpleyaml",
-            "org.yaml.snakeyaml"
-        ).forEach {
-            relocate(it, "libs.$it")
-        }
+//        listOf(
+//            "net.kyori",
+//            "org.bstats",
+//            "org.simpleyaml",
+//            "org.yaml.snakeyaml"
+//        ).forEach {
+//            relocate(it, "libs.$it")
+//        }
     }
 }
