@@ -1,6 +1,5 @@
 plugins {
     id("root-plugin")
-    id("maven-publish")
 }
 
 defaultTasks("build")
@@ -34,6 +33,7 @@ allprojects {
     ).forEach {
         project(it) {
             apply(plugin = "java")
+            apply(plugin = "maven-publish")
 
             repositories {
                 mavenCentral()
@@ -67,8 +67,12 @@ allprojects {
     }
 }
 
+
 publishing {
     publications.create<MavenPublication>("maven") {
+        groupId = project.group as String?
+        artifactId = project.name as String?
+        version = project.version  as String?
         from(components["java"])
     }
 }

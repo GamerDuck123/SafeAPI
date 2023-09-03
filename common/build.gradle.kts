@@ -23,14 +23,5 @@ tasks {
         archiveBaseName.set("${rootProject.name}-${project.name}")
         archiveClassifier.set("")
         mergeServiceFiles()
-
-//        listOf(
-//            "net.kyori",
-//            "org.bstats",
-//            "org.simpleyaml",
-//            "org.yaml.snakeyaml"
-//        ).forEach {
-//            relocate(it, "libs.$it")
-//        }
     }
 }
