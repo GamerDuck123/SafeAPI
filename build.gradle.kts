@@ -64,6 +64,11 @@ allprojects {
     }
 }
 
+publishing {
+    publications.create<MavenPublication>("maven") {
+        from(components["java"])
+    }
+}
 tasks {
     assemble {
         subprojects.forEach { project ->
